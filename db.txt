@@ -1,14 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import AppNavigator from './navigation/AppNavigator';
 import { initDB } from './database/db';
-import { useEffect } from 'react';
 
 export default function App() {
   useEffect(() => {
     initDB();
   }, []);
+
   return (
     <NavigationContainer>
       <AppNavigator />
