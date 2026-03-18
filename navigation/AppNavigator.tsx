@@ -5,35 +5,45 @@ import SignUpScreen from '../screens/SignUpScreen';
 import LoginScreen from '../screens/LoginScreen';
 import DashboardScreen from '../screens/DashboardScreen';
 
-// ✅ Define Types for Navigation
+// ✅ Navigation Types
 export type RootStackParamList = {
   SignUp: undefined;
   Login: undefined;
   Dashboard: { user: any };
 };
 
+// ✅ Props for session-based navigation
+type Props = {
+  initialRoute: 'Login' | 'Dashboard';
+  user?: any;
+};
+
 const Stack = createStackNavigator<RootStackParamList>();
 
-const AppNavigator = () => {
+// ✅ Updated Navigator with Props
+const AppNavigator: React.FC<Props> = ({ initialRoute, user }) => {
   return (
-    <Stack.Navigator initialRouteName="Login">
+    <Stack.Navigator initialRouteName={initialRoute}>
+      
       <Stack.Screen 
         name="SignUp" 
         component={SignUpScreen} 
         options={{ title: 'Create Account' }}
       />
-      
+
       <Stack.Screen 
         name="Login" 
         component={LoginScreen} 
         options={{ title: 'Login' }}
       />
-      
+
       <Stack.Screen 
         name="Dashboard" 
-        component={DashboardScreen} 
+        component={DashboardScreen}
+        initialParams={{ user }}
         options={{ title: 'Dashboard', headerLeft: () => null }}
       />
+
     </Stack.Navigator>
   );
 };

@@ -11,6 +11,7 @@ import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../navigation/AppNavigator';
 import { updateUser } from '../database/db';
+import { clearSession } from '../utils/session';
 
 type DashboardRouteProp = RouteProp<RootStackParamList, 'Dashboard'>;
 
@@ -40,7 +41,8 @@ type Props = {
     Alert.alert('Success', 'Profile updated');
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await clearSession();
     navigation.replace('Login');
   };
 
